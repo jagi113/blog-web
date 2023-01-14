@@ -37,6 +37,7 @@ body {
   #summary article img {
     width: 12rem;
     height: 12rem;
+    object-fit: contain;
     border-radius: 12px;
     transform: rotateZ(5deg);
     border: 5px solid white;

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}This post title {% endblock title %}
+{% block title %}{{post.title}}{% endblock title %}
 {% block css_files %}
 <link rel="stylesheet" href="{% static 'blog/post-detail.css' %}">
 <link rel="stylesheet" href="{% static 'blog/all-posts.css' %}">
@@ -13,16 +13,16 @@
 
     <article>
         <img src="{{ post.image }}" alt="{{ post.image }}">
-        <address>By Jaroslav</address>
+        <address>By {{post.author}}</address>
         <div>
-            Last updated on <time>January 13th</time>
+            Last updated on <time>{{post.updated_on|date:"d M Y"}}</time>
         </div>
     </article>
 </section>
 
 <main>
     <p>
-        {{post.content}}
+        {{post.content|linebreaks}}
     </p>
 </main>
 
