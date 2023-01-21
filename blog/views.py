@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 # Create your views here.
 
@@ -14,5 +14,8 @@ def posts(request):
     return render(request, "blog/all-posts.html", {"posts": posts})
 
 def post_detail(request, slug):
-    post = Post.objects.get(slug=slug)
-    return render(request, "blog/post-detail.html", {"post": post})
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, "blog/post-detail.html", {
+        "post": post,
+        "tags": post.tags.all()
+        })

@@ -28,7 +28,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     image = models.URLField(max_length = 400)
     slug = models.SlugField(max_length=200, unique=True, null=False, db_index=True)
-    author = models.ForeignKey(Author, on_delete= models.CASCADE, related_name='blog_post')
+    author = models.ForeignKey(Author, on_delete= models.CASCADE, related_name='posts')
     updated_on = models.DateTimeField(auto_now= True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
