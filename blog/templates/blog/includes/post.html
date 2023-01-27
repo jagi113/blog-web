@@ -1,13 +1,27 @@
-{% load static %}
 
 <li>
     <article class="post">
         <a href="{% url "post-detail-page" slug=post.slug %}">
-            <img src="{{ post.image }}" alt="{{ post.image }}">
+            <img src="{{ post.image.url }}" alt="{{ post.image }}">
             <div class="post__content">
                 <h3>{{ post.title }}</h3>
                 <p>{{ post.content }}</p>
             </div>
         </a>
+
+        
+        <div class="saved-for-later">
+            <form action="{% url "read-later" %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" value="{{ post.id }}" name="post_id">
+              <button>
+                {% if post.id in saved_for_later %}
+                Saved for later reading
+                {% else %}
+                  Read Later
+                {% endif %}
+              </button>
+            </form>
+          </div>
     </article>
 </li>
