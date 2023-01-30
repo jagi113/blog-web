@@ -20,14 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from decouple import config
+from dotenv import load_dotenv
+from os import getenv
+load_dotenv() 
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("IS_DEVELOPMENT", True)
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = [getenv("APP_HOST"), "localhost", "127.0.0.1" ]
+
 
 
 # Application definition
@@ -80,8 +85,12 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': getenv('U_SER'),
+        'PASSWORD': getenv('P_ASSWORD'),
+        'HOST': 'web-blog.cwounwulevhf.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -121,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
