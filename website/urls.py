@@ -24,5 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url="blog/")),
     path("blog/", include("blog.urls"))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
- + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 
