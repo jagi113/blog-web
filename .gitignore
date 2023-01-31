@@ -1,3 +1,4 @@
 db.sqlite3
 .env
 staticfiles/
+web-blog-app_accessKeys.csv

@@ -144,3 +144,19 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / "uploads"
 
 MEDIA_URL = "/blog-file/"
+
+#Setting for aws deployment with remote storage of files
+AWS_STORAGE_BUCKET_NAME = "web-blog-deployment-files"   # name of the bucket we created
+AWS_S3_REGION_NAME = "eu-central-1"  # region of a bucket - just the end of it
+AWS_ACCESS_KEY_ID = getenv("AWS_ACCESS_KEY_ID")     # access_key we created for a user
+AWS_SECRET_ACCESS_KEY = getenv("AWS_SECRET_ACCESS_KEY")  # secret access_key we created for a user
+
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+# For setting folder for static files and for upload files
+STATICFILES_FOLDER = "static"   # folder of this name will be created in s3bucket for static files
+MEDIAFILES_FOLDER = "media"
+
+# calling created classes in custom_storages.py
+STATICFILES_STORAGE = "custom_storages.StaticFileStorage"
+DEFAULT_FILE_STORAGE = "custom_storages.MediaFileStorage"
